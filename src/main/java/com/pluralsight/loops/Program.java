@@ -1,9 +1,12 @@
 package com.pluralsight.loops;
 
+import com.pluralsight.Person;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
+
     public static void main(String[] args) {
 
         ArrayList<Person> people = new ArrayList<>();
@@ -18,6 +21,7 @@ public class Program {
         people.add(new Person("Eden", "Samuel", 27));
         people.add(new Person("Noah", "Gebre", 35));
         people.add(new Person("Liya", "Demissie", 22));
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a first or last name to search: ");
@@ -26,10 +30,12 @@ public class Program {
         ArrayList<Person> matchedPeople = new ArrayList<>();
 
         for (int i = 0; i < people.size(); i++) {
+
             Person person = people.get(i);
 
-            if (person.getFirstName().equalsIgnoreCase(searchName) ||
-                    person.getLastName().equalsIgnoreCase(searchName)) {
+            if (person.getFirstName().equalsIgnoreCase(searchName)
+                    || person.getLastName().equalsIgnoreCase(searchName)) {
+
                 matchedPeople.add(person);
             }
         }
@@ -39,9 +45,14 @@ public class Program {
         if (matchedPeople.size() == 0) {
             System.out.println("No people found.");
         } else {
+
             for (int i = 0; i < matchedPeople.size(); i++) {
+
                 Person person = matchedPeople.get(i);
-                System.out.println(person.getFirstName() + " " + person.getLastName());
+
+                System.out.println(person.getFirstName()
+                        + " "
+                        + person.getLastName());
             }
         }
 
@@ -50,6 +61,7 @@ public class Program {
         int youngestAge = people.get(0).getAge();
 
         for (int i = 0; i < people.size(); i++) {
+
             Person person = people.get(i);
 
             totalAge += person.getAge();

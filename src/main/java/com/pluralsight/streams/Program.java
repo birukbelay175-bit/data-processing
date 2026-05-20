@@ -1,5 +1,7 @@
 package com.pluralsight.streams;
 
+import com.pluralsight.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,38 +28,27 @@ public class Program {
         System.out.print("Enter a first or last name to search: ");
         String searchName = scanner.nextLine();
 
-        // Step 1 - stream and filter
         List<Person> matchedPeople = people.stream()
-                .filter(person ->
-                        person.getFirstName().equalsIgnoreCase(searchName)
-                                || person.getLastName().equalsIgnoreCase(searchName))
+                .filter(person -> person.getFirstName().equalsIgnoreCase(searchName)
+                        || person.getLastName().equalsIgnoreCase(searchName))
                 .collect(Collectors.toList());
 
-        System.out.println("\nMatching People:");
+        matchedPeople.forEach(person ->
+                System.out.println(person.getFirstName() + " " + person.getLastName()));
 
-        if (matchedPeople.size() == 0) {
-            System.out.println("No people found.");
-        } else {
-            matchedPeople.forEach(person ->
-                    System.out.println(person.getFirstName() + " " + person.getLastName()));
-        }
-
-        // Step 2 - average age using streams
         double averageAge = people.stream()
                 .map(Person::getAge)
                 .reduce(0, Integer::sum) / (double) people.size();
 
-        // Step 3 - oldest age
         int oldestAge = people.stream()
                 .map(Person::getAge)
                 .reduce(Integer.MIN_VALUE, Integer::max);
 
-        // Step 3 - youngest age
         int youngestAge = people.stream()
                 .map(Person::getAge)
                 .reduce(Integer.MAX_VALUE, Integer::min);
 
-        System.out.println("\nAverage age: " + averageAge);
+        System.out.println("Average age: " + averageAge);
         System.out.println("Oldest age: " + oldestAge);
         System.out.println("Youngest age: " + youngestAge);
     }
